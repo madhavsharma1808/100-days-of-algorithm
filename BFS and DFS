@@ -1,0 +1,67 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+
+
+void BFS(int arr[][7], int start, int n)
+{
+	int i = start;
+	std::queue<int> q;
+	int visited[7] = { 0 };
+	visited[i] = 1;
+	q.push(i);	
+	std::cout << i<<" ";
+	while (!q.empty())
+	{
+		i = q.front();
+		q.pop();
+		for (int j = 1; j < n; j++)
+		{
+			if (arr[i][j] == 1 && visited[j]==0 )
+			{
+				std::cout << j<<" ";
+				visited[j] = 1;
+				q.push(j);
+			}
+		}
+	}
+	std::cout << std::endl;
+}
+
+void DFS(int arr[][7], int i, int n)
+{
+	static int visited[7] = { 0 };
+
+	if (visited[i] == 0)
+	{
+		visited[i] = 1;
+		std::cout << i<<" ";
+		for (int k = 1; k < n; k++)
+		{
+			if ((arr[i][k] == 1) && (visited[k] == 0))
+			{
+				DFS(arr, k, n);
+			}
+		}
+	}
+}
+
+
+
+
+
+int main()
+{
+	int arr[7][7] = {
+						{0,0,0,0,0,0,0},
+						{0,0,1,1,0,0,0},
+						{0,1,0,0,1,0,0},
+						{0,1,0,0,1,0,0},
+						{0,0,1,1,0,1,1},
+						{0,0,0,0,1,0,0},
+						{0,0,0,0,1,0,0}
+					};
+	BFS(arr, 1, 7);
+	DFS(arr, 1, 7);
+
+}
